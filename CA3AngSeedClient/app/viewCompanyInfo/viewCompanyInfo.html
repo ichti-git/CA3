@@ -1,0 +1,150 @@
+<form>
+  <div class="form-group">
+    <label for="search">Search Text</label>
+    <input type="text" class="form-control" ng-model="search" placeholder="Required">
+  </div>
+  <div class="form-group">
+    <label for="options">Options</label>
+    <select class="form-control" ng-model="options">
+        <option value="search">Standard</option>
+        <option value="vat">CVR</option>
+        <option value="name">Name</option>
+        <option value="produ">Production Unit</option>
+        <option value="phone">Phone number</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="country">Country</label>
+    <select class="form-control" ng-model="country">
+        <option value="dk">Denmark</option>
+        <option value="no">Norway</option>
+    </select>
+  </div>
+  <button type="submit" class="btn btn-default" ng-click="searchForCompany()">Search</button>
+</form>
+<br>
+<br>
+<div id='searchResult' ng-show='companydataavailable'>
+    <h3>Main unit:</h3>
+    <uib-accordion>
+        <uib-accordion-group>
+            <uib-accordion-heading>
+                {{companydata.name}}
+            </uib-accordion-heading>
+            <table>
+                <tr>
+                    <td>Name</td>
+                    <td ng-bind="companydata.name"></td>
+                </tr>
+                <tr>
+                    <td>CVR</td>
+                    <td ng-bind="companydata.vat"></td>
+                </tr>
+                <tr>
+                    <td>Address</td>
+                    <td ng-bind="companydata.address"></td>
+                </tr>
+                <tr>
+                    <td>City</td>
+                    <td ng-bind="companydata.city"></td>
+                </tr>
+                <tr>
+                    <td>Zip code</td>
+                    <td ng-bind="companydata.zipcode"></td>
+                </tr>
+                <tr>
+                    <td>Phone number</td>
+                    <td ng-bind="companydata.phone"></td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td ng-bind="companydata.email"></td>
+                </tr>
+                <tr>
+                    <td>Fax</td>
+                    <td ng-bind="companydata.fax"></td>
+                </tr>
+                <tr>
+                    <td>Company code</td>
+                    <td ng-bind="companydata.companycode"></td>
+                </tr>
+                <tr>
+                    <td>Company description</td>
+                    <td ng-bind="companydata.companydesc"></td>
+                </tr>
+                <tr>
+                    <td>Employees</td>
+                    <td ng-bind="companydata.employees"></td>
+                </tr>
+                <tr>
+                    <td>Start date</td>
+                    <td ng-bind="companydata.startdate"></td>
+                </tr>
+                <tr>
+                    <td>End date</td>
+                    <td ng-bind="companydata.enddate"></td>
+                </tr>
+                <tr>
+                    <td>Industry code</td>
+                    <td ng-bind="companydata.industrycode"></td>
+                </tr>
+                <tr>
+                    <td>Industry description</td>
+                    <td ng-bind="companydata.industrydesc"></td>
+                </tr>
+            </table>
+        </uib-accordion-group>
+        <h3>Production units:<h3/>
+        <uib-accordion-group ng-repeat='pu in companydata.productionunits'>
+            <uib-accordion-heading>
+                {{pu.name}}
+            </uib-accordion-heading>
+            <table>
+                <tr>
+                    <td>Name</td>
+                    <td ng-bind="companydata.name"></td>
+                </tr>
+                <tr>
+                    <td>Address</td>
+                    <td ng-bind="pu.address"></td>
+                </tr>
+                <tr>
+                    <td>City</td>
+                    <td ng-bind="pu.city"></td>
+                </tr>
+                <tr>
+                    <td>Zip code</td>
+                    <td ng-bind="pu.zipcode"></td>
+                </tr>
+                <tr>
+                    <td>Phone number</td>
+                    <td ng-bind="pu.phone"></td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td ng-bind="pu.email"></td>
+                </tr>
+                <tr>
+                    <td>Fax</td>
+                    <td ng-bind="pu.fax"></td>
+                </tr>
+                <tr>
+                    <td>Employees</td>
+                    <td ng-bind="pu.employees"></td>
+                </tr>
+                <tr>
+                    <td>Start date</td>
+                    <td ng-bind="pu.startdate"></td>
+                </tr>
+                <tr>
+                    <td>Industry code</td>
+                    <td ng-bind="pu.industrycode"></td>
+                </tr>
+                <tr>
+                    <td>Industry description</td>
+                    <td ng-bind="pu.industrydesc"></td>
+                </tr>
+            </table>            
+        </uib-accordion-group>
+    </uib-accordion>
+</div>

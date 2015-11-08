@@ -1,0 +1,66 @@
+<h2>Exchange rate calculator</h2>
+<form>
+    <table class='table'>
+        <tbody>
+        <tr class='form-group'>
+            <td>Amount: </td>
+            <td><input class="form-control" ng-model='calcAmount' ng-change='runExchange()' type="number"></td>
+        </tr>
+        
+        <tr class='form-group'>
+            <td>From: </td>
+            <td>        
+                <select class="form-control" ng-model='calcFrom' ng-change='runExchange()'>
+                    <option ng-repeat="er in exchangerates | orderBy:'currency.code'" value='{{er.currency.code}}'>{{er.currency.code}}</option>
+                </select>
+            </td>
+            <td rowspan="2" style="vertical-align: middle;">
+                <button class='btn btn-default' ng-click='swapCurrency()'>Swap currencies</button>
+            </td>
+        </tr>
+        
+        <tr class='form-group'>
+            <td>To: </td>
+            <td>        
+                <select class="form-control" ng-model='calcTo' ng-change='runExchange()'>
+                    <option ng-repeat="er in exchangerates | orderBy:'currency.code'" value='{{er.currency.code}}'>{{er.currency.code}}</option>
+                </select>
+            </td>
+        </tr>
+        <tr class='form-group'>
+            <td>Result: </td>
+            <td ng-bind="calcResult"></td>
+        </tr> 
+        </tbody>
+    </table>
+</form>
+
+<h2>Todays exchange rates</h2>
+<table class='table' ng-show="exchangeratesavailable">
+    <thead>
+        <tr>
+            <th>
+                Currency
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Exchange rate
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="er in exchangerates | orderBy:'currency.code'">
+            <td>
+                {{er.currency.code}}
+            </td>
+            <td>
+                {{er.currency.name}}
+            </td>
+            <td>
+                {{er.rate}}
+            </td>
+        </tr>
+    </tbody>
+</table>

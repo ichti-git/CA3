@@ -1,0 +1,112 @@
+<h2>Documentation</h2>
+<h3>Test strategy</h3>
+<h4>Backend</h4>
+UserFacadeTest.java<br>
+For the UserFacade I tested:
+<ul>
+    <li>Getting user by username</li>
+    <li>Creating a new user</li>
+    <li>Trying to create a new user, with an already existing username</li>
+    <li>Deleting an user by username</li>
+    <li>Trying to delete by a non-existing username</li>
+    <li>Authenticating correctly and with wrong id and name</li>
+</ul>
+All the above tests passed.<br>
+<br>
+CurrencyFacadeTest.java<br>
+For the CurrencyFacade I tested (or wanted to test):
+<ul>
+    <li>Adding a new currency</li>
+    <li>Getting the latest exchange rate by currency, happy path (not implemented)</li>
+    <li>Getting the latest exchange rate by a currency that doesn't exist</li>
+    <li>Adding a new exchange rate</li>
+    <li>Adding a new exchange rate where the currency doesn't exist yet</li>
+    <li>Getting the latest (cached) exchange rates (not implemented)</li>
+    <li>Updating the cached exchange rates (not implemented)</li>
+    <li>Authenticating correctly and with wrong id and name</li>
+</ul>
+All the above tests passed.
+
+<br>
+<h4>REST API</h4>
+RESTTest.java<br>
+I didn't get to implement the tests of the REST API, except a few. 
+I outlined (in the RESTTest.java file) what I wanted to test. 
+Here's the outline:<br>
+    /* Test company search (user test):<br>
+        search (everything)<br>
+        vat (cvr)<br>
+        name<br>
+        produ (production unit)<br>
+        phone<br>
+        404 (just one?)<br>
+    */<br>
+    <br>
+    /* Admin test:<br>
+        get user list<br>
+            - happy path<br>
+            - maybe 404?<br>
+        delete user<br>
+            - happy path<br>
+            - 404<br>
+    */<br>
+    <br>
+    /* Currency test:<br>
+        get daily rates<br>
+            - happy path<br>
+            - maybe 404?<br>
+        exchange calculator<br>
+            - happy path?<br>
+            - wrong amount<br>
+            - wrong from/to<br>
+            - 404<br>
+    */<br>
+    <br>
+    /* Create new user test<br>
+        - New user<br>
+        - Already existing user<br>
+    */<br>
+    
+<br>
+<h4>Frontend</h4>
+/Unit Tests<br>
+I tested the 4 controllers of the views: viewAllUsers, viewNewUser, 
+viewCompanyInfo, viewExchangeRate.<br>
+All Users: Testing that the users fetched is being assigned to the variable correctly.<br>
+All Users: Testing that the user being deleted is correctly removed from the array.<br>
+New User: Testing that variables usersignup and usersignupmsg is being assigned correctly.<br>
+Company Info: Testing that the function calls the correct URL, and then 
+the variables companydata and companydataavailable is being assigned correctly.<br>
+Exchange Rates: Testing that runExchange() calls the currect URL and that it assigns the result to 
+the variable calcResult. This test was made to test the function where it calls the API, 
+so it fails because it no longer uses the API.<br> 
+Exchange Rates: Testing that the currencies is being swapped correctly when calling swapCurrencies().
+<br>
+All the test except the runExchange() one should pass in test.
+
+<br>
+<h3>How to test the system</h3>
+There is 3 default users you can use to test the system. <br>
+They all use the password "test". The users and roles:<br>
+user - only User role.<br>
+admin - only Admin role.<br>
+all - both Admin and User role.<br>
+<br>
+If they do not work or you deleted them, you can recreate them by going to 
+<a href="api/make">api/make</a>. This will create those 3 users if they do not exist,
+and it does not require authentication.
+
+<br>
+<h3>General</h3>
+<a href="http://ca-ichti.rhcloud.com/CA3AngSeedServer">Openshift</a><br>
+<a href="">Github</a><br>
+This project was done alone.<br>
+<br>
+Right now you can only get the most recent exchange rate through the REST API.
+It would make sense if you could choose the date instead and also have a call to get all 
+(or maybe limited to some amount) the exchange rates in one call.<br>
+I didn't implement fail function in most of the angular function. That should of course 
+also be included.<br>
+I didn't know how to handle the case where you try to create a user with existing username.
+I ended up just sending a message about it back, with status code 200. It should probably have been
+some other status code (404?).
